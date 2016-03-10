@@ -58,17 +58,17 @@ interp::~interp()
 // -------------------------------------------------------------------
 double interp::lagrange(const double& u)
 {
-  double interp = 0.0;
+  double itp = 0.0;
   
   for(int i=0; i<m_n; i++) {
     double p = 1.0;
     for(int j=0; j<m_n; j++) {
       if(i!=j) p *= (u-m_x[j])/(m_x[i]-m_x[j]);
     }
-    interp += p * m_y[i];
+    itp += p * m_y[i];
   }
 
-  return interp;
+  return itp;
 }
 
 // -------------------------------------------------------------------
@@ -93,7 +93,7 @@ void interp::divdiff_coef()
 
 double interp::divdiff(const double& u)
 {
-  double interp = 0.0;
+  double itp = 0.0;
 
   if(m_divdiff == false) {
     divdiff_coef();
@@ -101,10 +101,10 @@ double interp::divdiff(const double& u)
   }
 
    for ( int i=(m_n-1); i>=1; i-- )
-      interp = (interp + m_dd[i]) * (u - m_x[i-1]);
-   interp += m_dd[0];
+      itp = (itp + m_dd[i]) * (u - m_x[i-1]);
+   itp += m_dd[0];
 
-  return interp;
+  return itp;
 }
 
 // -------------------------------------------------------------------
